@@ -1,99 +1,98 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class WeaponSwitch : MonoBehaviour
 {
-    public GameObject[] weapons;
+
+    public GameObject[] weapons; 
 
     public int selectedWeapon = 0;
 
-
+    private readonly List<GameObject> availableWeapons = new List<GameObject>();
 
     void Start()
     {
+        RefreshAvailableWeapons();
+        SelectWeapon();
+    }
+
+    void Update()
+    {
+        // NO tiene aramas no hace nada
+        if (availableWeapons.Count == 0) return;
+
+        int previousWeapon = selectedWeapon;
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll > 0f)
+            selectedWeapon = (selectedWeapon + 1) % availableWeapons.Count;
+        else if (scroll < 0f)
+            selectedWeapon = (selectedWeapon - 1 + availableWeapons.Count) % availableWeapons.Count;
+
+        if (previousWeapon != selectedWeapon)
+            SelectWeapon();
+
+    }
+
+    /// 
+    /// Metodo para desbloquear arma cuando se recoja
+    ///
+    public void UnlockWeapon(GameObject weaponToUnlock, bool autoEquip = true)
+    {
+        if (weaponToUnlock == null) return;
+
+        // Si ya la tienes, opcionalmente la equipas y ya
+        int existingIndex = availableWeapons.IndexOf(weaponToUnlock);
+        if (existingIndex >= 0)
+        {
+            if (autoEquip)
+            {
+                selectedWeapon = existingIndex;
+                SelectWeapon();
+            }
+            return;
+        }
+
+        // Asegura que esté activa para que se vea si se equipa
+        weaponToUnlock.SetActive(true);
+
+        // Guarda orden estable (orden de pickup)
+        availableWeapons.Add(weaponToUnlock);
+
+        // Auto equip (o no)
+        if (autoEquip)
+            selectedWeapon = availableWeapons.Count - 1;
+
         SelectWeapon();
     }
 
 
-    void Update()
+    /// 
+    /// Recolecta SOLO armas en layer Weapon que estén activas.
+    /// 
+    public void RefreshAvailableWeapons()
     {
+        availableWeapons.Clear();
 
-        int previousWeapon = selectedWeapon;
-
-        //para que se pueda con la rueda del raton seleccionar el arma 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        foreach (Transform child in transform)
         {
-            if (selectedWeapon >= weapons.Length - 1)
+            if (child.gameObject.layer == LayerMask.NameToLayer("Weapon") && child.gameObject.activeSelf)
             {
-                selectedWeapon = 0;
-            }
-            else
-            {
-                selectedWeapon++;
+                availableWeapons.Add(child.gameObject);
             }
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            if (selectedWeapon <= 0)
-            {
-                selectedWeapon = weapons.Length - 1;
-            }
-            else
-            {
-                selectedWeapon--;
-            }
-        }
-
-        //mover con los numeros del 1 al 9
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            selectedWeapon = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && weapons.Length >= 2)
-        {
-            selectedWeapon = 1;
-        }
-        
-
-        //SI TIENES MAS ARMAS PONES MAS DE ESTO
-
-
-
-
-
-
-
-        //para evitar si tenemos el arma llame al mismo metodo
-        if (previousWeapon != selectedWeapon)
-        {
-            SelectWeapon();
-        }
+        // Ajusta selectedWeapon para no salirse
+        if (availableWeapons.Count == 0) selectedWeapon = 0;
+        else selectedWeapon = Mathf.Clamp(selectedWeapon, 0, availableWeapons.Count - 1);
     }
 
     void SelectWeapon()
+{
+    for (int i = 0; i < availableWeapons.Count; i++)
     {
-        int i = 0;
-        foreach (Transform weapon in transform)
-        {
-            if (weapon.gameObject.layer == LayerMask.NameToLayer("Weapon"))
-            {
-                if (i == selectedWeapon)
-                {
-                    weapon.gameObject.SetActive(true);
-                }
-                else
-                {
-                    weapon.gameObject.SetActive(false);
-                }
-
-                i++;
-
-                
-            }
-
-
-            
-        }
+        availableWeapons[i].SetActive(i == selectedWeapon);
     }
+}
+
 }
