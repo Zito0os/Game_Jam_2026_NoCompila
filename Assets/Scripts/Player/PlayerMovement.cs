@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                staminaSlider.UseStamina(0);
+                staminaSlider.StopSprinting();
             }
         }
 

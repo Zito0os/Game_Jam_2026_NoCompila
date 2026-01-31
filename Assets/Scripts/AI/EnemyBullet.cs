@@ -13,6 +13,7 @@ public class EnemyBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // destruir bala de enemigo al colisionar con el jugador
+            GameManager.Instance.PerderMascara(20);
             Destroy(gameObject);
         }
 
