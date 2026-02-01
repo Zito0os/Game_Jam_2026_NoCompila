@@ -21,7 +21,7 @@ public class pausayeso : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             // Un solo punto de control para cambiar estado
             TogglePausa();
-            nextToggleTime = Time.unscaledTime + toggleCooldown;
+            //nextToggleTime = Time.unscaledTime + toggleCooldown;
         }
     }
     private void TogglePausa()
@@ -43,7 +43,7 @@ public class pausayeso : MonoBehaviour
     {
         juegoPausado =false;
         Time.timeScale = 1f;
-        
+        Cursor.lockState = CursorLockMode.Locked;
         menuPausa.SetActive(false);
     }
     public void Reiniciar()

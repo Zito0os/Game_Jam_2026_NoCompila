@@ -105,11 +105,11 @@ public class PlayerOxigen : MonoBehaviour
 
         if (esta_usando_mascara)
         {
-            // ✅ Asegurar que la máscara esté visible para animación/visual
+            // Asegurar que la máscara esté visible para animación/visual
             if (Mascarilla != null)
                 Mascarilla.SetActive(true);
 
-            // ✅ FX ON
+            // FX ON
             if (respiracionFX != null)
                 respiracionFX.Play(true);
 
@@ -120,7 +120,7 @@ public class PlayerOxigen : MonoBehaviour
         {
             vidaCoroutine = StartCoroutine(Perder_vida());
 
-            // ✅ FX OFF inmediato (esto no afecta la animación de quitar)
+            // FX OFF 
             if (respiracionFX != null)
             {
                 respiracionFX.Stop(true,
@@ -130,7 +130,7 @@ public class PlayerOxigen : MonoBehaviour
                 );
             }
 
-            // ✅ NO apagar la máscara al instante: esperar a que termine la animación
+            //esperar a que termine la animación
             quitarMascaraCoroutine = StartCoroutine(QuitarMascaraConDelay());
         }
     }
@@ -140,14 +140,14 @@ public class PlayerOxigen : MonoBehaviour
         // Espera para que se vea la animación de quitarse la máscara
         yield return new WaitForSeconds(delayQuitarMascara);
 
-        // (Opcional) Mover la máscara a una posición guardada (espalda, cinturón, etc.)
+        // Mover la máscara a una posición guardada 
         if (Mascarilla != null && posicionMascaraGuardada != null)
         {
             Mascarilla.transform.position = posicionMascaraGuardada.position;
             Mascarilla.transform.rotation = posicionMascaraGuardada.rotation;
         }
 
-        // Ahora sí: ocultar la máscara
+        //  ocultar la máscara
         if (Mascarilla != null)
             Mascarilla.SetActive(false);
 

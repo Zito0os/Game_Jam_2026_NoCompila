@@ -22,6 +22,7 @@ public class AI : MonoBehaviour
 
     public float distanceToFollowPlayer = 15;
 
+
     private GameObject player;
 
     public float liveEnemy = 100;
@@ -33,7 +34,7 @@ public class AI : MonoBehaviour
     {
         if (destinations == null || destinations.Length == 0)
         {
-            transform.gameObject.GetComponent<AI>().enabled = false;    
+            transform.gameObject.GetComponent<AI>().enabled = false;
         }
 
         //aqui mandamos al agente a el destino que es el destination1
@@ -88,7 +89,7 @@ public class AI : MonoBehaviour
         if (Vector3.Distance(transform.position, destinations[i].position) <= distanceToFollowPath)
         {
             //si el destino actual no es el ultimo destino, entonces cambiamos al siguiente destino
-            if (destinations[i] != destinations[destinations.Length - 1]) 
+            if (destinations[i] != destinations[destinations.Length - 1])
             {
                 i = i + 1;
             }
@@ -121,9 +122,8 @@ public class AI : MonoBehaviour
     {
         liveEnemy = liveEnemy - LiveToLose;
 
-        if(liveEnemy <= 0)
+        if (liveEnemy <= 0)
         {
-
             Destroy(gameObject);
         }
     }
