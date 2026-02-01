@@ -1,10 +1,20 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    public Transform camera;
+    public float alturaArriba = 0.5f;
+    public float tiempoArriba = 0.3f;
+    public float suavizado = 3f;
+    private float tiempo;
+    private float camYInicial;
+    private bool arriba = true;
+
 
     public CharacterController characterController;
     public float speed = 15f;
@@ -79,6 +89,45 @@ public class PlayerMovement : MonoBehaviour
         //animator.SetFloat("VelX", x);
         //animator.SetFloat("VelZ", z);
         //animator.SetBool("isSprinting", isSprinting);
+        if (x != 0 || z != 0)
+        {
+            
+
+
+            tiempo += Time.deltaTime;
+
+            if (tiempo >= tiempoArriba)
+            {
+                tiempo = 0f;
+                arriba = !arriba;
+              
+            }
+
+            
+            float objetivoY = arriba
+                ? camYInicial + alturaArriba
+                : camYInicial - alturaArriba;
+
+            camera.localPosition = Vector3.Lerp(
+                camera.localPosition,
+                new Vector3(camera.localPosition.x, objetivoY, camera.localPosition.z),
+                Time.deltaTime * suavizado
+            );
+
+
+
+        }
+        else
+        {
+            camera.localPosition = Vector3.Lerp(
+                camera.localPosition,
+                new Vector3(camera.localPosition.x, camYInicial, camera.localPosition.z),
+                Time.deltaTime * suavizado
+            );
+
+           
+            tiempo = 0f;
+        }
 
 
         //esto es para mover al jugador adelante o hacia atras 
@@ -93,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         //esto le asigna el movimiento al caracter controler del player 
         //y le asigna la velocidad que se le dio en el inspector
         characterController.Move(move * speed * Time.deltaTime * sprintSpeed);
-
+        
         // si alguien juega a 30 y alguien a 60 fps, el que juega a 30 fps se movera mas lento
         //por eso se multiplica por Time.deltaTime
 
@@ -142,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                staminaSlider.UseStamina(0);
+                staminaSlider.StopSprinting();
             }
         }
 

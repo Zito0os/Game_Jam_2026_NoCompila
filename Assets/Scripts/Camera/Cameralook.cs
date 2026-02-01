@@ -9,8 +9,31 @@ public class Cameralook : MonoBehaviour
     public float sensitivity = 80f;
     //posicion del player
     public Transform playerBody;
+    
 
     float xRotation = 0f;
+    public Transform camera;
+    public Transform cameraPivot;
+    public float anguloBalanceo = 10f;
+    public float suavizado = 6f;
+
+    void LateUpdate()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        float balanceoZ = (x != 0 || z != 0)
+            ? Mathf.Sin(Time.time * 6f) * anguloBalanceo
+            : 0f;
+
+        // la cámara sigue al pivot
+        camera.position = cameraPivot.position;
+        camera.rotation = Quaternion.Lerp(
+            camera.rotation,
+            cameraPivot.rotation * Quaternion.Euler(0f, 0f, balanceoZ),
+            Time.deltaTime * suavizado
+        );
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +62,7 @@ public class Cameralook : MonoBehaviour
 
 
         //el rotate hace que la camara gire en el eje X
+        
         playerBody.Rotate(Vector3.up * mouseX);
         
 

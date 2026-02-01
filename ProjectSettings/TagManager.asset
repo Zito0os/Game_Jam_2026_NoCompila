@@ -10,6 +10,8 @@ TagManager:
   - EnemyBullet
   - HealthObject
   - Destruible
+  - Mask_Recuperar
+  - Oxigeno_Recuperar
   layers:
   - Default
   - TransparentFX
