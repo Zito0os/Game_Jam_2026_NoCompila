@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
     {
         ammoText.text = gunammo.ToString();
         healthText.text = health.ToString();
-        oxigenoText.text = oxigeno.ToString() + "%";
-        mascaraText.text = mascara.ToString() + "%";
+        oxigenoText.text = oxigeno.ToString();
+        mascaraText.text = mascara.ToString();
         cambio_color();
     }
 
