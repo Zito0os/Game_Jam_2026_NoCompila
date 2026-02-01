@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
         }
         else if (health > 33 && health <= 66)
         {
-            healthText.color = amarillo;
+            mascaraText.color = amarillo;
         }
         else
         {
@@ -211,11 +211,6 @@ public class GameManager : MonoBehaviour
     {
         esta_enmascarado = mascarado;
     }
-
-
-
-
-
 
 
 

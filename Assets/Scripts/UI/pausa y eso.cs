@@ -41,6 +41,7 @@ public class pausayeso : MonoBehaviour
     }
     public void Reanudar()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         juegoPausado =false;
         Time.timeScale = 1f;
         

@@ -93,7 +93,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 781988058593101527, guid: 9457e1ed73d891b40a9423663abcc7be, type: 3}
       propertyPath: m_Name
-      value: Enemy_Hija Variant
+      value: Enemy_Hija
       objectReference: {fileID: 0}
     - target: {fileID: 1963017964876665187, guid: 9457e1ed73d891b40a9423663abcc7be, type: 3}
       propertyPath: animator
@@ -101,15 +101,15 @@ PrefabInstance:
       objectReference: {fileID: 4304657545589790591}
     - target: {fileID: 5056946546015499634, guid: 9457e1ed73d891b40a9423663abcc7be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.02
+      value: -0.56
       objectReference: {fileID: 0}
     - target: {fileID: 5056946546015499634, guid: 9457e1ed73d891b40a9423663abcc7be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 1.9585245
       objectReference: {fileID: 0}
     - target: {fileID: 5056946546015499634, guid: 9457e1ed73d891b40a9423663abcc7be, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 83
+      value: 83.50714
       objectReference: {fileID: 0}
     - target: {fileID: 5056946546015499634, guid: 9457e1ed73d891b40a9423663abcc7be, type: 3}
       propertyPath: m_LocalRotation.w
