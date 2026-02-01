@@ -15,7 +15,7 @@ public class PlayerInteractions : MonoBehaviour
             for (int i = itemsInTrigger.Count - 1; i >= 0; i--)
             {
                 Collider other = itemsInTrigger[i];
-                
+
                 if (other.gameObject.CompareTag("Oxigeno_Recuperar"))
                 {
                     GameManager.Instance.AgregarOxigeno(other.gameObject.GetComponent<Tanque_oxigeno>().oxigenoRestaurar);

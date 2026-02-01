@@ -147,7 +147,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7319727973669475132, guid: 04bc80751dc745444b865c84412055d1, type: 3}
       propertyPath: m_Name
-      value: Enemy_Policia Variant
+      value: Enemy_Policia
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319727973669475132, guid: 04bc80751dc745444b865c84412055d1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7319727973669475132, guid: 04bc80751dc745444b865c84412055d1, type: 3}
       propertyPath: m_IsActive
@@ -168,6 +172,10 @@ PrefabInstance:
     - target: {fileID: 8390419686934316168, guid: 04bc80751dc745444b865c84412055d1, type: 3}
       propertyPath: morirAfterSeconds
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390419686934316168, guid: 04bc80751dc745444b865c84412055d1, type: 3}
+      propertyPath: distanceToFollowPlayer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

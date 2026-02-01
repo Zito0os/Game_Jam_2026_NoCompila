@@ -12,6 +12,7 @@ TagManager:
   - Destruible
   - Mask_Recuperar
   - Oxigeno_Recuperar
+  - inicio_juego
   layers:
   - Default
   - TransparentFX

@@ -51,6 +51,12 @@ public class pausayeso : MonoBehaviour
     {
         Time.timeScale = 1f;
         
+        // Reiniciar el LevelManager antes de recargar la escena
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.ResetLevel();
+        }
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         
     }

@@ -43,9 +43,9 @@ public class GameManager : MonoBehaviour
 
 
 
-    public Color verde = Color.green;
-    public Color amarillo = Color.yellow;
-    public Color rojo = Color.red;
+    public Color verde;
+    public Color amarillo;
+    public Color rojo;
 
     public bool esta_enmascarado;
 
@@ -79,6 +79,12 @@ public class GameManager : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Haz muerto");
+            
+            // Reiniciar el LevelManager antes de recargar la escena
+            if (LevelManager.Instance != null)
+            {
+                LevelManager.Instance.ResetLevel();
+            }
             
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -193,6 +199,8 @@ public class GameManager : MonoBehaviour
         }
 
 
+
+
         if (mascara > 66)
         {
             mascaraText.color = verde;
@@ -204,6 +212,19 @@ public class GameManager : MonoBehaviour
         else
         {
             mascaraText.color = rojo;
+        }
+
+        if (gunammo > 10)
+        {
+            ammoText.color = verde;
+        }
+        else if (health > 4 && health <= 8)
+        {
+            ammoText.color = amarillo;
+        }
+        else
+        {
+            ammoText.color = rojo;
         }
     }
 

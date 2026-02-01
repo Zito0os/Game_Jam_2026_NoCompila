@@ -40,19 +40,17 @@ public class AI_Enemy_Hombre : MonoBehaviour
 
     public float morirAfterSeconds = 3.8f;
 
+    [Header("Random Movement")]
+    public bool useRandomMovement = false; // Si no hay destinations, usar movimiento random
+    public float randomMoveRadius = 20f; // Radio para generar posiciones random
+    private Vector3 randomDestination;
+    private bool usingRandomMovement = false;
+
     //public GameObject destination1;
     //public GameObject destination2;
 
     void Start()
     {
-        if (destinations == null || destinations.Length == 0)
-        {
-            transform.gameObject.GetComponent<AI>().enabled = false;
-        }
-
-        //aqui mandamos al agente a el destino que es el destination1
-        naveMeshAgent.destination = destinations[0].transform.position;
-
         //busca el objeto del jugador en la escena que tenga el script PlayerMovement
         player = FindObjectOfType<PlayerMovement>().gameObject;
 
@@ -66,6 +64,30 @@ public class AI_Enemy_Hombre : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isAlive", true);
+        }
+
+        // Verificar destinations
+        if (destinations == null || destinations.Length == 0 || destinations[0] == null)
+        {
+            // Si no hay destinations válidos, usar movimiento random
+            useRandomMovement = true;
+            usingRandomMovement = true;
+            GenerateRandomDestination();
+            naveMeshAgent.destination = randomDestination;
+            Debug.Log("No hay destinations válidos asignados, usando movimiento random");
+            
+            // Desactivar el script AI base si existe
+            AI aiScript = GetComponent<AI>();
+            if (aiScript != null)
+            {
+                aiScript.enabled = false;
+            }
+        }
+        else
+        {
+            //aqui mandamos al agente a el destino que es el destination1
+            naveMeshAgent.destination = destinations[0].transform.position;
+            usingRandomMovement = false;
         }
     }
 
@@ -110,24 +132,58 @@ public class AI_Enemy_Hombre : MonoBehaviour
     {
         atacando = false;
         naveMeshAgent.isStopped = false; // Asegurarse que puede moverse
-        naveMeshAgent.destination = destinations[i].transform.position;
 
-
-        //si la distancia entre el agente y el destino es menor o igual a la distancia que queremos para seguir el camino, entonces cambiamos al siguiente destino
-        if (Vector3.Distance(transform.position, destinations[i].position) <= distanceToFollowPath)
+        // Si está usando movimiento random
+        if (usingRandomMovement)
         {
-            //si el destino actual no es el ultimo destino, entonces cambiamos al siguiente destino
-            if (destinations[i] != destinations[destinations.Length - 1])
+            naveMeshAgent.destination = randomDestination;
+
+            // Si llegó a la posición random, generar una nueva
+            if (Vector3.Distance(transform.position, randomDestination) <= distanceToFollowPath)
             {
-                i = i + 1;
-            }
-            else
-            {
-                i = 0; //si es el ultimo destino, entonces volvemos al primer destino
+                GenerateRandomDestination();
             }
         }
+        else
+        {
+            // Usar destinations normales
+            naveMeshAgent.destination = destinations[i].transform.position;
 
+            //si la distancia entre el agente y el destino es menor o igual a la distancia que queremos para seguir el camino, entonces cambiamos al siguiente destino
+            if (Vector3.Distance(transform.position, destinations[i].position) <= distanceToFollowPath)
+            {
+                //si el destino actual no es el ultimo destino, entonces cambiamos al siguiente destino
+                if (destinations[i] != destinations[destinations.Length - 1])
+                {
+                    i = i + 1;
+                }
+                else
+                {
+                    i = 0; //si es el ultimo destino, entonces volvemos al primer destino
+                }
+            }
+        }
+    }
 
+    void GenerateRandomDestination()
+    {
+        // Generar una posición random alrededor de la posición actual
+        Vector2 randomCircle = Random.insideUnitCircle * randomMoveRadius;
+        Vector3 randomPoint = transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+
+        // Verificar si el punto está en el NavMesh
+        UnityEngine.AI.NavMeshHit hit;
+        if (UnityEngine.AI.NavMesh.SamplePosition(randomPoint, out hit, randomMoveRadius, UnityEngine.AI.NavMesh.AllAreas))
+        {
+            randomDestination = hit.position;
+            Debug.Log("Nueva posición random generada: " + randomDestination);
+        }
+        else
+        {
+            // Si no encuentra un punto válido, usar la posición actual
+            randomDestination = transform.position;
+            Debug.LogWarning("No se encontró un punto válido en el NavMesh, quedándose en posición actual");
+        }
     }
 
 
