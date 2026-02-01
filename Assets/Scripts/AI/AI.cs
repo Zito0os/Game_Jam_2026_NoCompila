@@ -124,6 +124,7 @@ public class AI : MonoBehaviour
 
         if (liveEnemy <= 0)
         {
+
             Destroy(gameObject);
         }
     }

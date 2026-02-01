@@ -4466,9 +4466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244d5764175f25e4f94d6453982164a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 790354801}
-  - {fileID: 1437265920}
+  weapons: []
   selectedWeapon: 0
 --- !u!1 &1753903686
 GameObject:
