@@ -79,10 +79,14 @@ public class PlayerOxigen : MonoBehaviour
             esta_corriendo = false;
             DetenerSprintOxigeno();
         }
+
+
     }
 
     void CambiarEstado()
     {
+       
+        //animator.SetBool("enmascarado", GameManager.Instance.esta_enmascarado);
         // Detener corrutinas activas
         if (oxigenoCoroutine != null)
         {
@@ -166,6 +170,7 @@ public class PlayerOxigen : MonoBehaviour
             }
             else
             {
+                // Cuando el oxígeno llega a 0, quitar vida
                 yield return new WaitForSeconds(2f);
                 GameManager.Instance.LoseHealth(5);
             }

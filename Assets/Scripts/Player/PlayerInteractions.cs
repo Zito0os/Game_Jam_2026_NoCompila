@@ -95,9 +95,9 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
-            //perder vida
-            GameManager.Instance.LoseHealth(5);
-            
+            //perder vida - DESACTIVADO: Solo balas visuales
+            //GameManager.Instance.LoseHealth(5);
+            Debug.Log("Bala enemiga detectada (visual solamente)");
         }
 
     }

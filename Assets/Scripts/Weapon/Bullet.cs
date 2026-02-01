@@ -7,16 +7,31 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        //checa si la bala colision� con un enemigo
+        //checa si la bala colision� con un enemigo
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            // Buscar el script AI_Enemy_Hombre en el objeto actual
+            AI_Enemy_Hombre enemy = collision.gameObject.GetComponent<AI_Enemy_Hombre>();
+            
+            // Si no lo encuentra, buscar en el padre
+            if (enemy == null)
+            {
+                enemy = collision.gameObject.GetComponentInParent<AI_Enemy_Hombre>();
+            }
 
-            collision.gameObject.GetComponent<AI>().LooseLife(20);
+            // Si lo encuentra, hacer daño
+            if (enemy != null)
+            {
+                enemy.LooseLife(20);
+                Debug.Log("Bala impactó enemigo - Daño: 20");
+            }
+            else
+            {
+                Debug.LogError("No se encontró AI_Enemy_Hombre en " + collision.gameObject.name);
+            }
 
-            // Destroy the enemy
-            //Destroy(collision.gameObject);
-            // Destroy the bullet
-            //Destroy(gameObject);
+            // Destruir la bala
+            Destroy(gameObject);
         }
 
 
