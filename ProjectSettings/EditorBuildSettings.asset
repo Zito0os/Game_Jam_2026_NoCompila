@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Inicio.unity
     guid: 487320af13a7e0d4ea7e1fc0c5bf02fe
   - enabled: 1
-    path: Assets/Scenes/EscenaFinal.unity
+    path: Assets/Scenes/CinematicaFinal.unity
     guid: 497e773e41962b549bb760811bd0437c
   - enabled: 1
-    path: Assets/Scenes/Creditos.unity
+    path: Assets/Scenes/CinematicaCreditos.unity
     guid: 9f2e9b06d9f963c46a326faabcb312a8
   - enabled: 1
     path: Assets/Scenes/EscenaInicioJuego.unity
