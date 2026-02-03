@@ -2383,6 +2383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4121bbd62ae0b0841995286d2e71a20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponChildName: 
 --- !u!65 &816106621
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3762,7 +3763,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1893576863}
-  m_LocalEulerAnglesHint: {x: 0.01000266, y: 0.00000004001561, z: 0.000009433073}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 359.8574}
 --- !u!1 &1391056805
 GameObject:
   m_ObjectHideFlags: 0
@@ -3795,6 +3796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4121bbd62ae0b0841995286d2e71a20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponChildName: 
 --- !u!65 &1391056807
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4866,7 +4868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9a6b7831f9bbb46bcc04f34c2c1a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  director: {fileID: 1893576862}
+  director: {fileID: 0}
 --- !u!4 &1769738817
 Transform:
   m_ObjectHideFlags: 0
@@ -5210,7 +5212,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1893576861}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 549aad2c3372a6240865947d5cc38244, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 49730a183767838478a79bf5fc39e05e, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -5219,6 +5221,10 @@ PlayableDirector:
   - key: {fileID: 7084450276082735876, guid: 549aad2c3372a6240865947d5cc38244, type: 2}
     value: {fileID: 1311560704}
   - key: {fileID: -1593866084191026751, guid: 549aad2c3372a6240865947d5cc38244, type: 2}
+    value: {fileID: 1311560705}
+  - key: {fileID: 7025876560031407766, guid: 49730a183767838478a79bf5fc39e05e, type: 2}
+    value: {fileID: 1311560704}
+  - key: {fileID: 4762470006948794902, guid: 49730a183767838478a79bf5fc39e05e, type: 2}
     value: {fileID: 1311560705}
   m_ExposedReferences:
     m_References: []
